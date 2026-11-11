@@ -128,6 +128,8 @@ enum Commands {
         #[arg(short, long, default_value_t = 100)]
         runs: usize,
     },
+    /// 🔌 Run as native Model Context Protocol (MCP) stdio server for Antigravity, Claude, or Cursor
+    Serve,
 }
 
 
@@ -476,6 +478,9 @@ async fn main() -> Result<()> {
             println!("{:<36} {:>7.3}ms {:>7.3}ms {:>7.3}ms {:>7.3}ms {:>7.3}ms {:>7.3}ms", "🔬 HNSW Semantic Injection Guard", c_min, c_mean, c_p50, c_p95, c_p99, c_max);
             println!("{:-<92}", "");
             println!("\n{} All subsystems operate sub-millisecond with zero cloud dependency or token billing!\n", "✅ CONCLUSION:".green().bold());
+        }
+        Commands::Serve => {
+            mcp::run_stdio_server().await?;
         }
     }
 
